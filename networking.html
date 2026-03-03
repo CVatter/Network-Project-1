@@ -2,8 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Networking Concepts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100%;
+            background-color: #34495e;
+            padding: 20px;
+            box-sizing: border-box;
+            transform: translateX(-240px);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            margin-top: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+        #toggle:checked ~ .sidebar {
+            transform: translateX(0);
+        }
+
+        /* Toggle button */
+        .menu-btn {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+            z-index: 1000;
+        }
+
+        /* Main content */
+        main {
+            margin: 20px auto;
+            padding: 30px;
+            width: 50%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        p {
+            line-height: 1.6;
+            white-space: pre-wrap; /* preserves line breaks for commands/logs */
+            font-family: "Courier New", Courier, monospace;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,64 +93,82 @@
         <h1>Networking Concepts</h1>
     </header>
 
-    <main>
-        <p>DNS: For my domain to be resolved to an IP, first someone enters the URL (https://cvatter.github.io/Network-Project-1/about.html). 
-            Next the browser will check router, DNS, and OS cache to figure out if the IP has already been visited/is already known. 
-            If not known, then the request goes through a recursive resolver that will query through IP addresses until it finds my website.
-            Next the resolver gets the IP address for my website.
-            Finally my browser connects to the IP.</p>
-        <p>IP ADDRESSING: 
-            
-            Result of nslookup for my Github pages
-        
-            C:\Users\admin>nslookup https://cvatter.github.io
-            Server:  UnKnown
-            Address:  2600:1700:2df2:d800::1
-
-            Non-authoritative answer:
-            Name:    https://cvatter.github.io
-            Addresses:  2606:50c0:8001::153
-                        2606:50c0:8000::153
-                        2606:50c0:8002::153
-                        2606:50c0:8003::153
-                        185.199.111.153
-                        185.199.110.153
-                        185.199.108.153
-                        185.199.109.153
-            
-            Result of running curl -v https://cvatter.github.io
-
-            * IPv6: 2606:50c0:8002::153, 2606:50c0:8003::153, 2606:50c0:8000::153, 2606:50c0:8001::153
-            * IPv4: 185.199.110.153, 185.199.109.153, 185.199.108.153, 185.199.111.153
-        </p>
-        <p>PROTOCOLS: My site uses https which can be seen in the URL. 
-            Common status codes include, 200 (OK), 201 (Created), 301 (Permanently redirected), 302 (Temporarily redirected), 404 (Not found), 500 (Server Error).
-            request/response headers:
-            
-            HTTP/1.1 200 OK
-            Connection: keep-alive
-            Content-Length: 674
-            Server: GitHub.com
-            Content-Type: text/html; charset=utf-8
-            Last-Modified: Tue, 03 Mar 2026 12:37:13 GMT
-            Access-Control-Allow-Origin: *
-            Strict-Transport-Security: max-age=31556952
-            ETag: "69a6d5f9-2a2"
-            expires: Tue, 03 Mar 2026 13:15:51 GMT
-            Cache-Control: max-age=600
-            x-proxy-cache: MISS
-            X-GitHub-Request-Id: 7FA6:1DD372:18D5E6C:1A8C18C:69A6DCAF</p>
-    </main>
-
-        <input type="checkbox" id="toggle" />
+    <!-- Sidebar toggle -->
+    <input type="checkbox" id="toggle" />
     <label for="toggle" class="menu-btn">☰ Menu</label>
 
+    <!-- Sidebar -->
     <div class="sidebar">
-        <h2><br/>Sidebar</h2>
+        <h2>Sidebar</h2>
         <a href="index.html">Home</a>
         <a href="networking.html">Networking Concepts</a>
         <a href="about.html">About</a>
     </div>
+
+    <!-- Main content -->
+    <main>
+        <section>
+            <h2>DNS</h2>
+            <p>
+DNS: For my domain to be resolved to an IP, first someone enters the URL (https://cvatter.github.io/Network-Project-1/about.html). 
+Next the browser will check router, DNS, and OS cache to figure out if the IP has already been visited/is already known. 
+If not known, then the request goes through a recursive resolver that will query through IP addresses until it finds my website.
+Next the resolver gets the IP address for my website.
+Finally my browser connects to the IP.
+            </p>
+        </section>
+
+        <section>
+            <h2>IP Addressing</h2>
+            <p>
+Result of nslookup for my Github pages:
+
+C:\Users\admin>nslookup https://cvatter.github.io
+Server:  UnKnown
+Address:  2600:1700:2df2:d800::1
+
+Non-authoritative answer:
+Name:    https://cvatter.github.io
+Addresses:  2606:50c0:8001::153
+            2606:50c0:8000::153
+            2606:50c0:8002::153
+            2606:50c0:8003::153
+            185.199.111.153
+            185.199.110.153
+            185.199.108.153
+            185.199.109.153
+
+Result of running curl -v https://cvatter.github.io
+
+* IPv6: 2606:50c0:8002::153, 2606:50c0:8003::153, 2606:50c0:8000::153, 2606:50c0:8001::153
+* IPv4: 185.199.110.153, 185.199.109.153, 185.199.108.153, 185.199.111.153
+            </p>
+        </section>
+
+        <section>
+            <h2>Protocols</h2>
+            <p>
+My site uses https which can be seen in the URL. 
+Common status codes include: 200 (OK), 201 (Created), 301 (Permanently redirected), 302 (Temporarily redirected), 404 (Not found), 500 (Server Error).
+
+Request/Response headers:
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 674
+Server: GitHub.com
+Content-Type: text/html; charset=utf-8
+Last-Modified: Tue, 03 Mar 2026 12:37:13 GMT
+Access-Control-Allow-Origin: *
+Strict-Transport-Security: max-age=31556952
+ETag: "69a6d5f9-2a2"
+Expires: Tue, 03 Mar 2026 13:15:51 GMT
+Cache-Control: max-age=600
+x-proxy-cache: MISS
+X-GitHub-Request-Id: 7FA6:1DD372:18D5E6C:1A8C18C:69A6DCAF
+            </p>
+        </section>
+    </main>
 
 </body>
 </html>
