@@ -1,0 +1,75 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: white;
+}
+
+/* Header */
+header {
+    background: white;
+    color: black;
+    padding: 15px 0;
+    text-align: center;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Hide checkbox */
+#toggle {
+  display: none;
+}
+
+/* Menu button */
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: opacity 0.3s ease;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+#toggle:checked + .menu-btn {
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;        /* hidden off screen */
+  width: 250px;
+  height: 100%;
+  background: #222;
+  color: white;
+  padding: 20px;
+  transition: left 0.3s ease;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+/* When checkbox is checked */
+#toggle:checked + .menu-btn + .sidebar {
+  left: 0;
+}
