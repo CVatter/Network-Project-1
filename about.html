@@ -2,30 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>About Page</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- XSS Protection Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 </head>
+
 <body>
 
-    <header>
-        <h1>About</h1>
-    </header>
+<header>
+    <h1>About</h1>
+</header>
 
-    <main>
-        <p>Email: cvatter1@student.gsu.edu</p>
-    </main>
+<main>
+
+    <p><strong>Email:</strong></p>
+
+    <input type="text" id="emailInput" placeholder="Enter your email">
+    <button onclick="submitEmail()">Submit</button>
+
+    <p id="emailDisplay"></p>
+
+</main>
+
+<script>
+function submitEmail() {
+    const input = document.getElementById("emailInput").value;
+
+    // XSS protection
+    const safe = DOMPurify.sanitize(input);
+
+    // safe rendering
+    document.getElementById("emailDisplay").textContent = safe;
+}
+</script>
+
+<!-- Sidebar -->
+<input type="checkbox" id="toggle" />
+<label for="toggle" class="menu-btn">☰ Menu</label>
+
+<div class="sidebar">
+    <h2>Sidebar</h2>
+    <a href="index.html">Home</a>
+    <a href="networking.html">Networking Concepts</a>
+    <a href="about.html">About</a>
+</div>
 
 </body>
-
-<input type="checkbox" id="toggle" />
-
-        <label for="toggle" class="menu-btn">☰ Menu</label>
-
-        <div class="sidebar">
-        <h2><br/>Sidebar</h2>
-        <a href="index.html">Home</a>
-        <a href="networking.html">Networking Concepts</a>
-        <a href="about.html">About</a>
-        </div>
-
 </html>

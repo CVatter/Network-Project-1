@@ -4,29 +4,51 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- XSS Protection Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 </head>
+
 <body>
 
-    <header>
-        <h1>Home Page</h1>
-    </header>
+<header>
+    <h1>Home Page</h1>
+</header>
 
-    <main>
-        <p>This is my Home page.</p>
-        <p>Group: Chad Vatter</p>
-    </main>
+<main>
+    <p>This is my Home page.</p>
+    <p>Group: Chad Vatter</p>
+
+    <h3>Safe Input Demo (XSS Protection)</h3>
+
+    <input type="text" id="homeInput" placeholder="Type something">
+    <button onclick="showHome()">Submit</button>
+
+    <p id="homeOutput"></p>
+</main>
+
+<script>
+function showHome() {
+    const input = document.getElementById("homeInput").value;
+
+    // sanitize input
+    const safe = DOMPurify.sanitize(input);
+
+    // safe rendering
+    document.getElementById("homeOutput").textContent = safe;
+}
+</script>
+
+<!-- Sidebar -->
+<input type="checkbox" id="toggle" />
+<label for="toggle" class="menu-btn">☰ Menu</label>
+
+<div class="sidebar">
+    <h2>Sidebar</h2>
+    <a href="index.html">Home</a>
+    <a href="networking.html">Networking Concepts</a>
+    <a href="about.html">About</a>
+</div>
 
 </body>
-
-<input type="checkbox" id="toggle" />
-
-        <label for="toggle" class="menu-btn">☰ Menu</label>
-
-        <div class="sidebar">
-        <h2><br/>Sidebar</h2>
-        <a href="index.html">Home</a>
-        <a href="networking.html">Networking Concepts</a>
-        <a href="about.html">About</a>
-        </div>
-
 </html>
