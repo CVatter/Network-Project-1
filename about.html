@@ -5,8 +5,8 @@
     <title>About Page</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- XSS Protection Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <!-- Google reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -17,24 +17,36 @@
 
 <main>
 
-    <p><strong>Email:</strong></p>
+    <h3>Contact Form</h3>
 
     <input type="text" id="emailInput" placeholder="Enter your email">
-    <button onclick="submitEmail()">Submit</button>
 
-    <p id="emailDisplay"></p>
+    <!-- reCAPTCHA widget -->
+    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+
+    <button onclick="submitForm()">Submit</button>
+
+    <p id="output"></p>
 
 </main>
 
 <script>
-function submitEmail() {
-    const input = document.getElementById("emailInput").value;
+function submitForm() {
 
-    // XSS protection
-    const safe = DOMPurify.sanitize(input);
+    // Check if reCAPTCHA is completed
+    const captchaResponse = grecaptcha.getResponse();
 
-    // safe rendering
-    document.getElementById("emailDisplay").textContent = safe;
+    if (captchaResponse.length === 0) {
+        alert("Please complete the reCAPTCHA!");
+        return;
+    }
+
+    // Get user input
+    const email = document.getElementById("emailInput").value;
+
+    // Display result safely
+    document.getElementById("output").textContent =
+        "Submitted email: " + email;
 }
 </script>
 
